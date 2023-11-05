@@ -1,15 +1,14 @@
-
 <template>
   <v-container>
-    <v-row>
-      <v-col>
-        <v-text-field label="Poziom cukru we krwi" type="number" v-model="sugarLevel"/>
-        <v-text-field label="Ilość węglowodanów do posiłku" type="number" v-model="carbs" />
+    <v-row justify="center">
+      <v-col cols="12" md="6">
+        <v-text-field v-model="sugarLevel" :label="$t('sugar.level')" type="number" />
+        <v-text-field v-model="carbAmount" :label="$t('carb.amount')" type="number" />
 
-        <v-text-field label="Ile podać insuliny" type="number" v-model="insulin" disabled />
+        <v-text-field v-model="insulinDose" :label="$t('insulin.dose')" type="number" disabled />
 
         <div class="d-flex justify-center">
-          <v-btn color="success" @click="calculate">Oblicz</v-btn>
+          <v-btn color="success" @click="calculate">{{ $t('calculate') }}</v-btn>
         </div>
       </v-col>
     </v-row>
@@ -20,14 +19,14 @@
 import calculateInsulinDose from '~/libs/calculate-insulin-dose'
 
 const sugarLevel = ref<number | undefined>()
-const carbs = ref<number | undefined>()
-const insulin = ref()
+const carbAmount = ref<number | undefined>()
+const insulinDose = ref()
 
-watch([sugarLevel, carbs], () => insulin.value = undefined)
+watch([sugarLevel, carbAmount], () => (insulinDose.value = undefined))
 
 const calculate = () => {
-  if( sugarLevel.value && carbs.value) {
-    insulin.value = calculateInsulinDose(carbs.value, 15, sugarLevel.value)
+  if (sugarLevel.value && carbAmount.value) {
+    insulinDose.value = calculateInsulinDose(carbAmount.value, 15, sugarLevel.value)
   }
 }
 </script>

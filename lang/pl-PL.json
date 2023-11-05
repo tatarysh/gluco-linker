@@ -1,0 +1,7 @@
+{
+  "app.name": "Gluco Linker",
+  "calculate": "Oblicz",
+  "sugar.level": "Poziom cukru we krwi",
+  "carb.amount": "Ilość węglowodanów do posiłku",
+  "insulin.dose": "Ile podać insuliny"
+}
