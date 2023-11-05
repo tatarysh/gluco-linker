@@ -14,7 +14,7 @@
 
             <v-card>
               <v-list>
-                <v-list-item v-for="lang in availableLocales" :key="lang" :to="switchLocalePath(lang.code)">
+                <v-list-item v-for="lang in availableLocales" :key="lang.code" :to="switchLocalePath(lang.code)">
                   <template #prepend>
                     <span class="me-3">{{ lang.icon }}</span>
                   </template>
@@ -29,14 +29,33 @@
       </v-container>
     </v-app-bar>
     <v-main>
+      <vite-pwa-manifest />
+
       <nuxt-page />
     </v-main>
   </v-app>
 </template>
 
 <script setup lang="ts">
-const { locale, locales } = useI18n()
+const { locale, locales, t } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
+const availableLocales = computed(() => locales.value.filter((i) => typeof i === 'object' && i.code !== locale.value))
 
-const availableLocales = computed(() => locales.value.filter((i) => i.code !== locale.value))
+useHead({
+  htmlAttrs: {
+    lang: locale.value,
+  },
+  link: [
+    {
+      rel: 'icon',
+      type: 'image/png',
+      href: '/favicon.png',
+    },
+  ],
+})
+
+useSeoMeta({
+  title: computed(() => t('app.name')),
+  description: computed(() => t('app.description')),
+})
 </script>

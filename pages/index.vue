@@ -5,7 +5,7 @@
         <v-text-field v-model="sugarLevel" :label="$t('sugar.level')" type="number" />
         <v-text-field v-model="carbAmount" :label="$t('carb.amount')" type="number" />
 
-        <v-text-field v-model="insulinDose" :label="$t('insulin.dose')" type="number" disabled />
+        <v-text-field v-model="insulinDose" :label="$t('insulin.dose')" type="number" :disabled="true" />
 
         <div class="d-flex justify-center">
           <v-btn color="success" @click="calculate">{{ $t('calculate') }}</v-btn>

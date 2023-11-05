@@ -1,5 +1,6 @@
 {
   "app.name": "Gluco Linker",
+  "app.description": "Calculate Insulin Dosage for Meals - Use our simple online insulin calculator to determine the appropriate insulin dosage for your meals. Easily manage your diabetes with our insulin dosing tool.",
   "calculate": "Calculate",
   "sugar.level": "Blood sugar level",
   "carb.amount": "Carbohydrate amount",

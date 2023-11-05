@@ -1,9 +1,8 @@
 export default defineNuxtConfig({
   ssr: false,
   devtools: { enabled: true },
-  modules: ['@invictus.codes/nuxt-vuetify', '@nuxtjs/i18n'],
+  modules: ['@invictus.codes/nuxt-vuetify', '@nuxtjs/i18n', '@vite-pwa/nuxt'],
   i18n: {
-    locale: 'en',
     lazy: true,
     langDir: 'lang',
     defaultLocale: 'en',
@@ -30,7 +29,6 @@ export default defineNuxtConfig({
     },
   },
   vuetify: {
-    /* vuetify options */
     vuetifyOptions: {
       theme: {
         defaultTheme: 'dark',
