@@ -8,8 +8,8 @@
           </v-app-bar-title>
 
           <v-menu>
-            <template #activator="{ props, on }">
-              <v-btn v-bind="props" icon="mdi-translate" v-on="on" />
+            <template #activator="{ props }">
+              <v-btn v-bind="props" icon="mdi-translate" />
             </template>
 
             <v-card>
@@ -48,8 +48,8 @@ useHead({
   link: [
     {
       rel: 'icon',
-      type: 'image/png',
-      href: '/favicon.png',
+      type: 'image/webp',
+      href: '/favicon.webp',
     },
   ],
 })

@@ -1,7 +1,23 @@
+import en from './lang/en-US.json'
+
 export default defineNuxtConfig({
   ssr: false,
   devtools: { enabled: true },
-  modules: ['@invictus.codes/nuxt-vuetify', '@nuxtjs/i18n', '@vite-pwa/nuxt'],
+  modules: ['@invictus.codes/nuxt-vuetify', '@nuxtjs/i18n', '@kevinmarrec/nuxt-pwa'],
+  pwa: {
+    manifest: {
+      name: 'Gluco Linker',
+      description: en['app.description'],
+      theme_color: '#4CAF50',
+      background_color: '#000000',
+    },
+    icon: {
+      source: './public/favicon.webp',
+    },
+    workbox: {
+      enabled: true,
+    },
+  },
   i18n: {
     lazy: true,
     langDir: 'lang',
@@ -29,6 +45,10 @@ export default defineNuxtConfig({
     },
   },
   vuetify: {
+    moduleOptions: {
+      useIconCDN: true,
+      treeshaking: true,
+    },
     vuetifyOptions: {
       theme: {
         defaultTheme: 'dark',
