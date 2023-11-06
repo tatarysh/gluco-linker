@@ -3,6 +3,7 @@
   "app.description": "Obliczanie Dawki Insuliny do Posiłków - Skorzystaj z naszego prostego kalkulatora insuliny online, aby określić odpowiednią dawkę insuliny do Twoich posiłków. Łatwo zarządzaj swoją cukrzycą dzięki naszemu narzędziu do dawkowania insuliny.",
   "calculate": "Oblicz",
   "sugar.level": "Poziom cukru we krwi",
-  "carb.amount": "Ilość węglowodanów do posiłku",
-  "insulin.dose": "Ile podać insuliny"
+  "carb.amount": "Ilość węglowodanów w posiłku",
+  "insulin.dose": "Ile podać insuliny",
+  "units": "jednostek"
 }

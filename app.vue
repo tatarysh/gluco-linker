@@ -29,8 +29,6 @@
       </v-container>
     </v-app-bar>
     <v-main>
-      <vite-pwa-manifest />
-
       <nuxt-page />
     </v-main>
   </v-app>

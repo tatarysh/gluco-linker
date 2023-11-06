@@ -4,5 +4,6 @@
   "calculate": "Calculate",
   "sugar.level": "Blood sugar level",
   "carb.amount": "Carbohydrate amount",
-  "insulin.dose": "How much insulin to administer"
+  "insulin.dose": "How much insulin to administer",
+  "units": "units"
 }
