@@ -3,7 +3,7 @@
     <v-row justify="center">
       <v-col cols="12" md="6">
         <v-text-field
-          v-model="sugarLevel"
+          v-model.number="sugarLevel"
           :label="$t('sugar.level')"
           type="number"
           suffix="mg/dL"
@@ -11,24 +11,26 @@
           variant="solo-filled"
         />
         <v-text-field
-          v-model="carbAmount"
+          v-model.number="carbAmount"
           :label="$t('carb.amount')"
           type="number"
           persistent-placeholder
           variant="solo-filled"
+          :suffix="$t('gram:short_unit')"
         />
 
         <v-text-field
-          v-model="insulinDose"
+          :value="sumInsulin"
           :label="$t('insulin.dose')"
           :suffix="$t('units')"
           type="number"
           :disabled="true"
           persistent-placeholder
           variant="solo"
+          :messages="details"
         />
 
-        <div class="d-flex justify-center">
+        <div class="d-flex justify-center my-3">
           <v-btn color="success" @click="calculate">{{ $t('calculate') }}</v-btn>
         </div>
       </v-col>
@@ -37,17 +39,42 @@
 </template>
 
 <script setup lang="ts">
-import calculateInsulinDose from '~/libs/calculate-insulin-dose'
+import calculateInsulinDose from '../libs/calculate-insulin-dose'
+import type { Report } from '../libs/calculate-insulin-dose'
+import { calculatorSettings } from '../composable/use-calculator-settings'
+
+const i18n = useI18n()
 
 const sugarLevel = ref<number | undefined>()
 const carbAmount = ref<number | undefined>()
-const insulinDose = ref()
+const insulinDose = ref<Report>()
+
+const sumInsulin = computed(() => {
+  if (!insulinDose.value) {
+    return 0
+  }
+
+  const sum = insulinDose.value.dose + insulinDose.value.correction
+
+  return (sum > 0 ? sum : 0).toFixed(2)
+})
+
+const details = computed(() => {
+  if (!insulinDose.value) {
+    return
+  }
+
+  return i18n.t('calculator:details', {
+    dose: insulinDose.value.dose.toFixed(2),
+    correction: insulinDose.value.correction.toFixed(2),
+  })
+})
 
 watch([sugarLevel, carbAmount], () => (insulinDose.value = undefined))
 
 const calculate = () => {
   if (sugarLevel.value && carbAmount.value) {
-    insulinDose.value = calculateInsulinDose(carbAmount.value, 15, sugarLevel.value).toFixed(2)
+    insulinDose.value = calculateInsulinDose(carbAmount.value, sugarLevel.value, calculatorSettings.value)
   }
 }
 </script>

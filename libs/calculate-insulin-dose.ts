@@ -1,21 +1,19 @@
-export default (carbohydrates: number, carbToInsulinRatio: number, bloodSugarLevel: number): number => {
-  // Calculate the basic insulin dose based on carbohydrates
-  const basicDose = carbohydrates / carbToInsulinRatio
+import type { Settings } from '../composable/use-calculator-settings'
 
-  // If blood sugar level is out of the target range, calculate a correction
-  const targetRangeMin = 80 // Minimum target blood sugar level in mg/dL
-  const targetRangeMax = 180 // Maximum target blood sugar level in mg/dL
+export type Report = { dose: number; correction: number }
+
+export default (carbohydrates: number, bloodSugarLevel: number, settings: Settings): Report => {
+  const dose = carbohydrates / settings.carb_insulin_ratio
 
   let correction = 0
 
-  if (bloodSugarLevel < targetRangeMin) {
-    // If blood sugar is too low, add insulin
-    correction = (targetRangeMin - bloodSugarLevel) / 50 // An assumed correction factor
-  } else if (bloodSugarLevel > targetRangeMax) {
-    // If blood sugar is too high, subtract insulin
-    correction = (bloodSugarLevel - targetRangeMax) / 50 // An assumed correction factor
+  if (settings.target_range_bottom > bloodSugarLevel) {
+    correction -= (settings.target_range_bottom - bloodSugarLevel) / settings.insulin_correction_factor
   }
 
-  // The total insulin dose is the sum of the basic dose and correction
-  return basicDose + correction
+  if (settings.target_range_top < bloodSugarLevel) {
+    correction += (bloodSugarLevel - settings.target_range_top) / settings.insulin_correction_factor
+  }
+
+  return { dose, correction }
 }

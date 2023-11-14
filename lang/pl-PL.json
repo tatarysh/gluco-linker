@@ -5,5 +5,14 @@
   "sugar.level": "Poziom cukru we krwi",
   "carb.amount": "Ilość węglowodanów w posiłku",
   "insulin.dose": "Ile podać insuliny",
-  "units": "jednostek"
+  "units": "jednostek",
+  "gram:short_unit": "g",
+  "rules:number_greater_than": "Liczba powinna być większa niż %{number}.",
+  "rules:number_less_than": "Liczba powinna być mniejsza niż %{number}.",
+  "calculator:details": "Posiłek: %{dose}, Korekta: %{correction}.",
+  "setting:carb_insulin_ratio": "Współczynnik insuliny / węglowodany",
+  "setting:insulin_correction_factor": "Współczynnik korekty insuliny",
+  "setting:target_range_bottom": "Zakres docelowy (dolny)",
+  "setting:target_range_top": "Zakres docelowy (górny)",
+  "save": "Zapisz"
 }

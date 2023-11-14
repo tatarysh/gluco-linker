@@ -5,5 +5,14 @@
   "sugar.level": "Blood sugar level",
   "carb.amount": "Carbohydrate amount",
   "insulin.dose": "How much insulin to administer",
-  "units": "units"
+  "units": "units",
+  "gram:short_unit": "g",
+  "rules:number_greater_than": "The number should be greater than %{number}.",
+  "rules:number_less_than": "The number should be less than %{number}.",
+  "calculator:details": "Meal: %{dose}, Correction: %{correction}.",
+  "setting:carb_insulin_ratio": "Carb Insulin Ratio",
+  "setting:insulin_correction_factor": "Insulin Correction Factor",
+  "setting:target_range_bottom": "Target Range (Bottom)",
+  "setting:target_range_top": "Target Range (Top)",
+  "save": "Save"
 }

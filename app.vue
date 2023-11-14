@@ -7,24 +7,29 @@
             {{ $t('app.name') }}
           </v-app-bar-title>
 
-          <v-menu>
-            <template #activator="{ props }">
-              <v-btn v-bind="props" icon="mdi-translate" />
-            </template>
+          <div class="d-flex">
+            <v-btn icon="mdi-calculator-variant" :to="localePath({ name: 'index' })" />
+            <v-btn icon="mdi-cog" :to="localePath({ name: 'settings' })" />
 
-            <v-card>
-              <v-list>
-                <v-list-item v-for="lang in availableLocales" :key="lang.code" :to="switchLocalePath(lang.code)">
-                  <template #prepend>
-                    <span class="me-3">{{ lang.icon }}</span>
-                  </template>
-                  <template #title>
-                    <span>{{ lang.name }}</span>
-                  </template>
-                </v-list-item>
-              </v-list>
-            </v-card>
-          </v-menu>
+            <v-menu>
+              <template #activator="{ props }">
+                <v-btn v-bind="props" icon="mdi-translate" />
+              </template>
+
+              <v-card>
+                <v-list>
+                  <v-list-item v-for="lang in availableLocales" :key="lang.code" :to="switchLocalePath(lang.code)">
+                    <template #prepend>
+                      <span class="me-3">{{ lang.icon }}</span>
+                    </template>
+                    <template #title>
+                      <span>{{ lang.name }}</span>
+                    </template>
+                  </v-list-item>
+                </v-list>
+              </v-card>
+            </v-menu>
+          </div>
         </div>
       </v-container>
     </v-app-bar>
@@ -36,6 +41,7 @@
 
 <script setup lang="ts">
 const { locale, locales, t } = useI18n()
+const localePath = useLocalePath()
 const switchLocalePath = useSwitchLocalePath()
 const availableLocales = computed(() => locales.value.filter((i) => typeof i === 'object' && i.code !== locale.value))
 

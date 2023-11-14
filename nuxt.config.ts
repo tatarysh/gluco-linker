@@ -25,9 +25,6 @@ export default defineNuxtConfig({
     icon: {
       source: './public/favicon.webp',
     },
-    workbox: {
-      enabled: true,
-    },
   },
   i18n: {
     lazy: true,
