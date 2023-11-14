@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.1](https://github.com/tatarysh/gluco-linker/compare/v0.2.0...v0.2.1) (2023-11-14)
+
+
+### Bug Fixes
+
+* added missing dependency @vueuse/core to the project ([58afc3e](https://github.com/tatarysh/gluco-linker/commit/58afc3e277281371c273d56cbc0a29d07b252d20))
+
 ## [0.2.0](https://github.com/tatarysh/gluco-linker/compare/v0.1.0...v0.2.0) (2023-11-14)
 
 
