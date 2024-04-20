@@ -3,7 +3,7 @@ import en from './lang/en-US.json'
 export default defineNuxtConfig({
   ssr: false,
   devtools: { enabled: true },
-  modules: ['@invictus.codes/nuxt-vuetify', '@nuxtjs/i18n', '@kevinmarrec/nuxt-pwa'],
+  modules: ['@invictus.codes/nuxt-vuetify', '@nuxtjs/i18n', '@kevinmarrec/nuxt-pwa', 'nuxt-gtag'],
   app: {
     head: {
       viewport: 'width=device-width, initial-scale=1, user-scalable=0',
@@ -25,6 +25,9 @@ export default defineNuxtConfig({
     icon: {
       source: './public/favicon.webp',
     },
+  },
+  gtag: {
+    id: process.env.GOOGLE_GTM,
   },
   i18n: {
     lazy: true,
