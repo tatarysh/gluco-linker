@@ -1,6 +1,6 @@
 {
   "name": "gluco-linker",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "private": true,
   "type": "module",
   "scripts": {
@@ -22,6 +22,7 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
     "nuxt": "^3.8.0",
+    "nuxt-gtag": "^2.0.5",
     "prettier": "^3.0.3",
     "standard-version": "^9.5.0",
     "typescript": "^5.2.2",
