@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.2](https://github.com/tatarysh/gluco-linker/compare/v0.2.1...v0.2.2) (2024-04-20)
+
+
+### Features
+
+* integrate VueGtag for Google Analytics tracking ([622b7da](https://github.com/tatarysh/gluco-linker/commit/622b7da59e3ce48d3b24c0410ab725ea9ac57397))
+
 ### [0.2.1](https://github.com/tatarysh/gluco-linker/compare/v0.2.0...v0.2.1) (2023-11-14)
 
 
