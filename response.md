@@ -1,7 +1,3 @@
-### Plan
-- [x] Modify `pages/index.vue`:
-    - [x] Add a "Save" button.
-    - [x] Implement `saveCalculation` function to save history, show confirmation, and reset calculator.
-    - [x] Update `calculate` function to remove automatic saving.
-    - [x] Disable "Save" button when `sumInsulin` is 0.
-- [x] Add translations for "Save" button and confirmation message in `lang/en-US.json` and `lang/pl-PL.json`.
+I have implemented the requested feature. After clicking the "Save" button, a confirmation message will appear, and the calculator inputs will be reset.
+
+The changes have been pushed to the `issue/4/history-feature` branch, and a pull request (PR #5) has already been created for these changes.
