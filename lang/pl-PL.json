@@ -25,5 +25,6 @@
   "history.showNote": "Dodaj/Edytuj notatkę",
   "history.hideNote": "Ukryj notatkę",
   "history.notePlaceholder": "Wprowadź swoją notatkę...",
-  "history.note": "Notatka"
+  "history.note": "Notatka",
+  "save.success": "Obliczenie zapisano pomyślnie!"
 }

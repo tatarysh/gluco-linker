@@ -25,5 +25,6 @@
   "history.showNote": "Add/Edit Note",
   "history.hideNote": "Hide Note",
   "history.notePlaceholder": "Enter your note here...",
-  "history.note": "Note"
+  "history.note": "Note",
+  "save.success": "Calculation saved successfully!"
 }

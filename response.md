@@ -1,5 +1,7 @@
-I have addressed your requests:
-
-1.  **`GEMINI.md` file creation**: I have created a `GEMINI.md` file in the root of the repository to provide project-specific context and instructions for the Gemini CLI.
-
-2.  **Vuetify3 components for inputs**: I have investigated the codebase and found that all input fields in `.vue` files are already using `v-text-field` components, which are part of Vuetify3. Therefore, the project is already adhering to the guideline of using Vuetify3 components for inputs.
+### Plan
+- [x] Modify `pages/index.vue`:
+    - [x] Add a "Save" button.
+    - [x] Implement `saveCalculation` function to save history, show confirmation, and reset calculator.
+    - [x] Update `calculate` function to remove automatic saving.
+    - [x] Disable "Save" button when `sumInsulin` is 0.
+- [x] Add translations for "Save" button and confirmation message in `lang/en-US.json` and `lang/pl-PL.json`.

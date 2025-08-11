@@ -32,9 +32,11 @@
 
         <div class="d-flex justify-center my-3">
           <v-btn color="success" @click="calculate">{{ $t('calculate') }}</v-btn>
+          <v-btn color="primary" @click="saveCalculation" :disabled="sumInsulin === '0.00' || sumInsulin === '0'">{{ $t('save') }}</v-btn>
         </div>
       </v-col>
     </v-row>
+    <v-snackbar v-model="showSnackbar" :timeout="3000">{{ snackbarMessage }}</v-snackbar>
   </v-container>
 </template>
 
@@ -50,6 +52,8 @@ const i18n = useI18n()
 const sugarLevel = ref<number | undefined>()
 const carbAmount = ref<number | undefined>()
 const insulinDose = ref<Report>()
+const showSnackbar = ref(false)
+const snackbarMessage = ref('')
 
 const sumInsulin = computed(() => {
   if (!insulinDose.value) {
@@ -77,18 +81,25 @@ watch([sugarLevel, carbAmount], () => (insulinDose.value = undefined))
 const calculate = () => {
   if (sugarLevel.value && carbAmount.value) {
     insulinDose.value = calculateInsulinDose(carbAmount.value, sugarLevel.value, calculatorSettings.value)
+  }
+}
 
-    if (insulinDose.value) {
-      addHistoryEntry({
-        inputs: {
-          glucose: sugarLevel.value,
-          carbs: carbAmount.value,
-        },
-        result: {
-          insulinDose: insulinDose.value.dose + insulinDose.value.correction,
-        },
-      })
-    }
+const saveCalculation = () => {
+  if (insulinDose.value && sugarLevel.value && carbAmount.value) {
+    addHistoryEntry({
+      inputs: {
+        glucose: sugarLevel.value,
+        carbs: carbAmount.value,
+      },
+      result: {
+        insulinDose: insulinDose.value.dose + insulinDose.value.correction,
+      },
+    })
+    snackbarMessage.value = i18n.t('save.success')
+    showSnackbar.value = true
+    sugarLevel.value = undefined
+    carbAmount.value = undefined
+    insulinDose.value = undefined
   }
 }
 </script>
