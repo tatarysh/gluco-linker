@@ -1,39 +1,56 @@
 <template>
-  <div>
-    <h1>{{ $t('history.title') }}</h1>
-    <div v-if="history.length === 0">
-      <p>{{ $t('history.noEntries') }}</p>
-    </div>
-    <div v-else>
-      <ul>
-        <li v-for="entry in history" :key="entry.id">
-          <div>
-            <strong>{{ $t('history.date') }}:</strong> {{ new Date(entry.timestamp).toLocaleString() }}
-          </div>
-          <div>
-            <strong>{{ $t('history.glucose') }}:</strong> {{ entry.inputs.glucose }} mg/dl
-          </div>
-          <div>
-            <strong>{{ $t('history.carbs') }}:</strong> {{ entry.inputs.carbs }} g
-          </div>
-          <div>
-            <strong>{{ $t('history.insulinDose') }}:</strong> {{ entry.result.insulinDose.toFixed(2) }}
-          </div>
-          <div>
-            <button @click="toggleNote(entry.id)">
-              {{ editingNoteId === entry.id ? $t('history.hideNote') : $t('history.showNote') }}
-            </button>
-            <div v-if="editingNoteId === entry.id">
-              <textarea v-model="noteText" @blur="saveNote(entry.id)" :placeholder="$t('history.notePlaceholder')"></textarea>
+  <v-container>
+    <v-row justify="center">
+      <v-col cols="12" md="8">
+        <v-card>
+          <v-card-title>{{ $t('history.title') }}</v-card-title>
+          <v-card-text>
+            <div v-if="history.length === 0">
+              <p>{{ $t('history.noEntries') }}</p>
             </div>
-            <div v-else-if="entry.note">
-              <strong>{{ $t('history.note') }}:</strong> {{ entry.note }}
-            </div>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
+            <v-data-table
+              v-else
+              :headers="headers"
+              :items="history"
+              item-key="id"
+              class="elevation-1"
+            >
+              <template v-slot:item.timestamp="{ item }">
+                {{ new Date(item.timestamp).toLocaleString() }}
+              </template>
+              <template v-slot:item.inputs.glucose="{ item }">
+                {{ item.inputs.glucose }} mg/dl
+              </template>
+              <template v-slot:item.inputs.carbs="{ item }">
+                {{ item.inputs.carbs }} g
+              </template>
+              <template v-slot:item.result.insulinDose="{ item }">
+                {{ item.result.insulinDose.toFixed(2) }}
+              </template>
+              <template v-slot:item.note="{ item }">
+                <v-icon @click="toggleNote(item.id)">
+                  {{ editingNoteId === item.id ? 'mdi-eye-off' : 'mdi-eye' }}
+                </v-icon>
+                <div v-if="editingNoteId === item.id">
+                  <v-textarea
+                    v-model="noteText"
+                    @blur="saveNote(item.id)"
+                    :placeholder="$t('history.notePlaceholder')"
+                    rows="2"
+                    auto-grow
+                    variant="outlined"
+                  ></v-textarea>
+                </div>
+                <div v-else-if="item.note">
+                  {{ item.note }}
+                </div>
+              </template>
+            </v-data-table>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script setup lang="ts">
@@ -43,6 +60,14 @@ import { useHistory, type HistoryEntry } from '~/composable/use-history';
 const { history, updateNote } = useHistory();
 const editingNoteId = ref<string | null>(null);
 const noteText = ref('');
+
+const headers = [
+  { title: 'Date', key: 'timestamp' },
+  { title: 'Glucose', key: 'inputs.glucose' },
+  { title: 'Carbs', key: 'inputs.carbs' },
+  { title: 'Insulin Dose', key: 'result.insulinDose' },
+  { title: 'Note', key: 'note' },
+];
 
 const toggleNote = (id: string) => {
   if (editingNoteId.value === id) {
@@ -62,16 +87,3 @@ const saveNote = (id: string) => {
   editingNoteId.value = null;
 };
 </script>
-
-<style scoped>
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  border: 1px solid #ccc;
-  padding: 1rem;
-  margin-bottom: 1rem;
-}
-</style>

@@ -30,10 +30,14 @@
           :messages="details"
         />
 
-        <div class="d-flex justify-center my-3">
-          <v-btn color="success" @click="calculate">{{ $t('calculate') }}</v-btn>
-          <v-btn color="primary" @click="saveCalculation" :disabled="sumInsulin === '0.00' || sumInsulin === '0'">{{ $t('save') }}</v-btn>
-        </div>
+        <v-row class="my-3" justify="space-between">
+          <v-col cols="auto">
+            <v-btn color="success" @click="calculate">{{ $t('calculate') }}</v-btn>
+          </v-col>
+          <v-col cols="auto">
+            <v-btn color="primary" @click="saveCalculation" :disabled="sumInsulin === '0.00' || sumInsulin === '0'">{{ $t('save') }}</v-btn>
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
     <v-snackbar v-model="showSnackbar" :timeout="3000">{{ snackbarMessage }}</v-snackbar>
