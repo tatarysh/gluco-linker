@@ -42,7 +42,9 @@
 import calculateInsulinDose from '../libs/calculate-insulin-dose'
 import type { Report } from '../libs/calculate-insulin-dose'
 import { calculatorSettings } from '../composable/use-calculator-settings'
+import { useHistory } from '~/composable/use-history'
 
+const { addHistoryEntry } = useHistory()
 const i18n = useI18n()
 
 const sugarLevel = ref<number | undefined>()
@@ -75,6 +77,18 @@ watch([sugarLevel, carbAmount], () => (insulinDose.value = undefined))
 const calculate = () => {
   if (sugarLevel.value && carbAmount.value) {
     insulinDose.value = calculateInsulinDose(carbAmount.value, sugarLevel.value, calculatorSettings.value)
+
+    if (insulinDose.value) {
+      addHistoryEntry({
+        inputs: {
+          glucose: sugarLevel.value,
+          carbs: carbAmount.value,
+        },
+        result: {
+          insulinDose: insulinDose.value.dose + insulinDose.value.correction,
+        },
+      })
+    }
   }
 }
 </script>

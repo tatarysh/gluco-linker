@@ -14,5 +14,16 @@
   "setting:insulin_correction_factor": "Współczynnik korekty insuliny",
   "setting:target_range_bottom": "Zakres docelowy (dolny)",
   "setting:target_range_top": "Zakres docelowy (górny)",
-  "save": "Zapisz"
+  "save": "Zapisz",
+  "navigation.history": "Historia",
+  "history.title": "Historia",
+  "history.noEntries": "Brak wpisów w historii.",
+  "history.date": "Data",
+  "history.glucose": "Poziom cukru",
+  "history.carbs": "Węglowodany",
+  "history.insulinDose": "Dawka insuliny",
+  "history.showNote": "Dodaj/Edytuj notatkę",
+  "history.hideNote": "Ukryj notatkę",
+  "history.notePlaceholder": "Wprowadź swoją notatkę...",
+  "history.note": "Notatka"
 }

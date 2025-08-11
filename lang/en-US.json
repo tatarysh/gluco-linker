@@ -14,5 +14,16 @@
   "setting:insulin_correction_factor": "Insulin Correction Factor",
   "setting:target_range_bottom": "Target Range (Bottom)",
   "setting:target_range_top": "Target Range (Top)",
-  "save": "Save"
+  "save": "Save",
+  "navigation.history": "History",
+  "history.title": "History",
+  "history.noEntries": "No entries in history.",
+  "history.date": "Date",
+  "history.glucose": "Glucose",
+  "history.carbs": "Carbs",
+  "history.insulinDose": "Insulin Dose",
+  "history.showNote": "Add/Edit Note",
+  "history.hideNote": "Hide Note",
+  "history.notePlaceholder": "Enter your note here...",
+  "history.note": "Note"
 }
