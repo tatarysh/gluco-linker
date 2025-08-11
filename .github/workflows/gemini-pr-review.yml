@@ -162,6 +162,7 @@ jobs:
           settings: |-
             {
               "maxSessionTurns": 20,
+              "model": "gemini-2.5-flash",
               "mcpServers": {
                 "github": {
                   "command": "docker",

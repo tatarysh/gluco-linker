@@ -206,6 +206,7 @@ jobs:
           settings: |-
             {
               "maxSessionTurns": 50,
+              "model": "gemini-2.5-flash",
               "telemetry": {
                 "enabled": false,
                 "target": "gcp"

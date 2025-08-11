@@ -76,6 +76,7 @@ jobs:
           settings: |-
             {
               "maxSessionTurns": 25,
+              "model": "gemini-2.5-flash",
               "coreTools": [
                 "run_shell_command(echo)",
                 "run_shell_command(gh label list)",
