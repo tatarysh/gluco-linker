@@ -20,8 +20,10 @@ export function useHistory() {
 
   const loadHistory = () => {
     const storedHistory = localStorage.getItem(HISTORY_STORAGE_KEY);
+    console.log('Loading history - storedHistory:', storedHistory);
     if (storedHistory) {
       history.value = JSON.parse(storedHistory);
+      console.log('Loading history - parsed history:', history.value);
     }
   };
 
