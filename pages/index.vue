@@ -30,11 +30,41 @@
           :messages="details"
         />
 
+        <v-checkbox
+          v-model="addNotes"
+          :label="$t('calculator:add_notes')"
+        />
+
+        <v-textarea
+          v-if="addNotes"
+          v-model="notes"
+          :label="$t('calculator:notes')"
+          variant="solo-filled"
+          rows="3"
+        />
+
         <div class="d-flex justify-center my-3">
           <v-btn color="success" @click="calculate">{{ $t('calculate') }}</v-btn>
+          <v-btn
+            color="primary"
+            class="ml-2"
+            :disabled="!canSave"
+            @click="saveInsulinDose"
+          >
+            {{ $t('save') }}
+          </v-btn>
         </div>
       </v-col>
     </v-row>
+
+    <v-snackbar v-model="snackbar" :timeout="3000">
+      {{ snackbarText }}
+      <template #actions>
+        <v-btn color="blue" variant="text" @click="snackbar = false">
+          {{ $t('close') }}
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -42,12 +72,20 @@
 import calculateInsulinDose from '../libs/calculate-insulin-dose'
 import type { Report } from '../libs/calculate-insulin-dose'
 import { calculatorSettings } from '../composable/use-calculator-settings'
+import { useInsulinHistory } from '../composable/use-insulin-history'
 
 const i18n = useI18n()
+const { saveHistory } = useInsulinHistory()
 
 const sugarLevel = ref<number | undefined>()
 const carbAmount = ref<number | undefined>()
 const insulinDose = ref<Report>()
+
+const addNotes = ref(false)
+const notes = ref<string | undefined>()
+
+const snackbar = ref(false)
+const snackbarText = ref('')
 
 const sumInsulin = computed(() => {
   if (!insulinDose.value) {
@@ -75,6 +113,25 @@ watch([sugarLevel, carbAmount], () => (insulinDose.value = undefined))
 const calculate = () => {
   if (sugarLevel.value && carbAmount.value) {
     insulinDose.value = calculateInsulinDose(carbAmount.value, sugarLevel.value, calculatorSettings.value)
+  }
+}
+
+const canSave = computed(() => parseFloat(sumInsulin.value) > 0)
+
+const saveInsulinDose = () => {
+  if (insulinDose.value) {
+    saveHistory({
+      insulinAmount: parseFloat(sumInsulin.value),
+      timestamp: Date.now(),
+      ...(notes.value && { notes: notes.value }),
+    });
+    sugarLevel.value = undefined;
+    carbAmount.value = undefined;
+    insulinDose.value = undefined;
+    notes.value = undefined;
+    addNotes.value = false;
+    snackbarText.value = i18n.t('calculator:save_success');
+    snackbar.value = true;
   }
 }
 </script>

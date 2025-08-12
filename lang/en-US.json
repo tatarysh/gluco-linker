@@ -14,5 +14,12 @@
   "setting:insulin_correction_factor": "Insulin Correction Factor",
   "setting:target_range_bottom": "Target Range (Bottom)",
   "setting:target_range_top": "Target Range (Top)",
-  "save": "Save"
+  "save": "Save",
+  "calculator:save_success": "Insulin dose saved successfully!",
+  "close": "Close",
+  "calculator:add_notes": "Add notes",
+  "calculator:notes": "Notes",
+  "history:title": "Insulin History",
+  "history:time": "Time",
+  "history:note_update_success": "Note updated successfully!"
 }
