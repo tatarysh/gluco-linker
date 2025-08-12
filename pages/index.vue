@@ -99,7 +99,7 @@ const saveCalculation = () => {
         insulinDose: insulinDose.value.dose + insulinDose.value.correction,
       },
     };
-    console.log('Adding history entry:', newEntry);
+    
     addHistoryEntry(newEntry);
     snackbarMessage.value = i18n.t('save.success')
     showSnackbar.value = true
