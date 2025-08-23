@@ -23,7 +23,7 @@
               rows="1"
               auto-grow
               hide-details
-              @change="updateNote(item)"
+              @update:modelValue="updateNote(item)" // Use @update:modelValue
             />
           </template>
         </v-data-table>
@@ -45,7 +45,7 @@
 import { useInsulinHistory } from '~/composable/use-insulin-history'
 
 const i18n = useI18n()
-const { insulinHistory } = useInsulinHistory()
+const { insulinHistory, saveHistoryToLocalStorage } = useInsulinHistory() // Import saveHistoryToLocalStorage
 
 const snackbar = ref(false)
 const snackbarText = ref('')
@@ -70,7 +70,8 @@ const updateNote = (item: any) => {
   // For now, it's directly bound to item.notes, so it updates the ref.
   // We need to re-save the entire history to local storage.
   if (process.client) {
-    }
+    saveHistoryToLocalStorage(); // Explicitly save history
+  }
   snackbarText.value = i18n.t('history:note_update_success');
   snackbar.value = true;
 }

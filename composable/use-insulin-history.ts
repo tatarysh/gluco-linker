@@ -43,6 +43,7 @@ export const useInsulinHistory = () => {
 
   return {
     insulinHistory,
-    addRecord, // Renamed saveHistory to addRecord for clarity
+    addRecord,
+    saveHistoryToLocalStorage, // Export saveHistoryToLocalStorage
   };
 };
