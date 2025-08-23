@@ -32,7 +32,14 @@
 
         <div class="d-flex justify-center my-3">
           <v-btn color="success" @click="calculate">{{ $t('calculate') }}</v-btn>
+          <v-btn color="primary" class="ml-2" :disabled="sumInsulin <= 0" @click="saveInsulinDose">
+            {{ $t('save') }}
+          </v-btn>
         </div>
+
+        <v-checkbox v-model="showNotes" :label="$t('add.notes')" density="compact" class="mt-4" />
+
+        <v-textarea v-if="showNotes" v-model="notes" :label="$t('notes')" variant="solo-filled" rows="3" auto-grow />
       </v-col>
     </v-row>
   </v-container>
@@ -42,8 +49,12 @@
 import calculateInsulinDose from '../libs/calculate-insulin-dose'
 import type { Report } from '../libs/calculate-insulin-dose'
 import { calculatorSettings } from '../composable/use-calculator-settings'
+import { useInsulinHistory } from '../composable/use-insulin-history'
 
 const i18n = useI18n()
+const { addRecord } = useInsulinHistory()
+// Assuming a useSnackbar composable exists or will be created
+const snackbar = useSnackbar()
 
 const sugarLevel = ref<number | undefined>()
 const carbAmount = ref<number | undefined>()
@@ -72,9 +83,29 @@ const details = computed(() => {
 
 watch([sugarLevel, carbAmount], () => (insulinDose.value = undefined))
 
+const showNotes = ref(false)
+const notes = ref<string | undefined>()
+
 const calculate = () => {
   if (sugarLevel.value && carbAmount.value) {
     insulinDose.value = calculateInsulinDose(carbAmount.value, sugarLevel.value, calculatorSettings.value)
+  }
+}
+
+const saveInsulinDose = () => {
+  if (sumInsulin.value && parseFloat(sumInsulin.value) > 0) {
+    addRecord(parseFloat(sumInsulin.value), notes.value)
+    // Clear inputs and notes after saving
+    sugarLevel.value = undefined
+    carbAmount.value = undefined
+    insulinDose.value = undefined
+    notes.value = undefined
+    showNotes.value = false
+    // Display success message
+    snackbar.add({
+      type: 'success',
+      message: i18n.t('insulin.dose.saved'),
+    })
   }
 }
 </script>

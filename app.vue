@@ -9,6 +9,7 @@
 
           <div class="d-flex">
             <v-btn icon="mdi-calculator-variant" :to="localePath({ name: 'index' })" />
+            <v-btn icon="mdi-history" :to="localePath({ name: 'history' })" />
             <v-btn icon="mdi-cog" :to="localePath({ name: 'settings' })" />
 
             <v-menu>
@@ -36,14 +37,25 @@
     <v-main>
       <nuxt-page />
     </v-main>
+
+    <v-snackbar v-model="isSnackbarVisible" :timeout="snackbarTimeout" :color="snackbarType" location="bottom right">
+      {{ snackbarMessage }}
+      <template #actions>
+        <v-btn icon="mdi-close" @click="hide" />
+      </template>
+    </v-snackbar>
   </v-app>
 </template>
 
 <script setup lang="ts">
+import { useSnackbar } from './composable/use-snackbar'
+
 const { locale, locales, t } = useI18n()
 const localePath = useLocalePath()
 const switchLocalePath = useSwitchLocalePath()
 const availableLocales = computed(() => locales.value.filter((i) => typeof i === 'object' && i.code !== locale.value))
+
+const { isSnackbarVisible, snackbarMessage, snackbarType, snackbarTimeout, hide } = useSnackbar()
 
 useHead({
   htmlAttrs: {
