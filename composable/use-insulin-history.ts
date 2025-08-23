@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, watchEffect, onMounted } from 'vue'
 
 interface InsulinRecord {
   insulinAmount: number;
@@ -9,28 +9,40 @@ interface InsulinRecord {
 const INSULIN_HISTORY_KEY = 'insulinHistory';
 
 const insulinHistory = ref<InsulinRecord[]>([]);
+let isHistoryLoaded = false; // Flag to ensure history is loaded only once
 
 const loadHistory = () => {
-  if (process.client) {
+  if (process.client && !isHistoryLoaded) {
     const history = localStorage.getItem(INSULIN_HISTORY_KEY);
     if (history) {
       insulinHistory.value = JSON.parse(history);
     }
+    isHistoryLoaded = true;
   }
 };
 
-const saveHistory = (record: InsulinRecord) => {
-  insulinHistory.value.push(record);
+const saveHistoryToLocalStorage = () => {
   if (process.client) {
     localStorage.setItem(INSULIN_HISTORY_KEY, JSON.stringify(insulinHistory.value));
   }
 };
 
 export const useInsulinHistory = () => {
-  loadHistory();
+  onMounted(() => {
+    loadHistory();
+  });
+
+  watchEffect(() => {
+    // Save history to local storage whenever insulinHistory changes
+    saveHistoryToLocalStorage();
+  });
+
+  const addRecord = (record: InsulinRecord) => {
+    insulinHistory.value.push(record);
+  };
 
   return {
     insulinHistory,
-    saveHistory,
+    addRecord, // Renamed saveHistory to addRecord for clarity
   };
 };

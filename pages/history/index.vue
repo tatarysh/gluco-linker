@@ -70,8 +70,7 @@ const updateNote = (item: any) => {
   // For now, it's directly bound to item.notes, so it updates the ref.
   // We need to re-save the entire history to local storage.
   if (process.client) {
-    localStorage.setItem('insulinHistory', JSON.stringify(insulinHistory.value));
-  }
+    }
   snackbarText.value = i18n.t('history:note_update_success');
   snackbar.value = true;
 }

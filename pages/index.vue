@@ -75,7 +75,7 @@ import { calculatorSettings } from '../composable/use-calculator-settings'
 import { useInsulinHistory } from '../composable/use-insulin-history'
 
 const i18n = useI18n()
-const { saveHistory } = useInsulinHistory()
+const { addRecord } = useInsulinHistory()
 
 const sugarLevel = ref<number | undefined>()
 const carbAmount = ref<number | undefined>()
@@ -120,7 +120,7 @@ const canSave = computed(() => parseFloat(sumInsulin.value) > 0)
 
 const saveInsulinDose = () => {
   if (insulinDose.value) {
-    saveHistory({
+    addRecord({
       insulinAmount: parseFloat(sumInsulin.value),
       timestamp: Date.now(),
       ...(notes.value && { notes: notes.value }),
