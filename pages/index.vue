@@ -33,6 +33,21 @@
         <div class="d-flex justify-center my-3">
           <v-btn color="success" @click="calculate">{{ $t('calculate') }}</v-btn>
         </div>
+
+        <div class="d-flex justify-center my-3">
+          <v-btn color="primary" :disabled="!sumInsulin || parseFloat(sumInsulin) <= 0" @click="saveRecord">{{ $t('save') }}</v-btn>
+        </div>
+
+        <v-checkbox v-model="showNotes" :label="$t('calculator:add_notes')" />
+
+        <v-textarea
+          v-if="showNotes"
+          v-model="note"
+          :label="$t('calculator:notes')"
+          variant="outlined"
+          auto-grow
+          rows="3"
+        />
       </v-col>
     </v-row>
   </v-container>
@@ -42,12 +57,18 @@
 import calculateInsulinDose from '../libs/calculate-insulin-dose'
 import type { Report } from '../libs/calculate-insulin-dose'
 import { calculatorSettings } from '../composable/use-calculator-settings'
+import { useInsulinHistory } from '../composable/use-insulin-history'
+import { useSnackbar } from '../composable/use-snackbar'
 
 const i18n = useI18n()
+const { addRecord } = useInsulinHistory()
+const { showSnackbar } = useSnackbar()
 
 const sugarLevel = ref<number | undefined>()
 const carbAmount = ref<number | undefined>()
 const insulinDose = ref<Report>()
+const showNotes = ref(false)
+const note = ref('')
 
 const sumInsulin = computed(() => {
   if (!insulinDose.value) {
@@ -75,6 +96,18 @@ watch([sugarLevel, carbAmount], () => (insulinDose.value = undefined))
 const calculate = () => {
   if (sugarLevel.value && carbAmount.value) {
     insulinDose.value = calculateInsulinDose(carbAmount.value, sugarLevel.value, calculatorSettings.value)
+  }
+}
+
+const saveRecord = () => {
+  if (sumInsulin.value && parseFloat(sumInsulin.value) > 0) {
+    addRecord(parseFloat(sumInsulin.value), showNotes.value ? note.value : undefined)
+    sugarLevel.value = undefined
+    carbAmount.value = undefined
+    insulinDose.value = undefined
+    showNotes.value = false
+    note.value = ''
+    showSnackbar(i18n.t('calculator:save_success'), 'success')
   }
 }
 </script>

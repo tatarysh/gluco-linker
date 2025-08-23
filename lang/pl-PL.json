@@ -14,5 +14,12 @@
   "setting:insulin_correction_factor": "Współczynnik korekty insuliny",
   "setting:target_range_bottom": "Zakres docelowy (dolny)",
   "setting:target_range_top": "Zakres docelowy (górny)",
-  "save": "Zapisz"
+  "save": "Zapisz",
+  "calculator:add_notes": "Dodaj opcjonalne notatki",
+  "calculator:notes": "Notatki",
+  "calculator:save_success": "Zapisano rekord insuliny!",
+  "history.title": "Historia Iniekcji Insuliny",
+  "history.table.insulinAmount": "Ilość Insuliny",
+  "history.table.timestamp": "Czas Podania",
+  "history.table.note": "Notatka"
 }
