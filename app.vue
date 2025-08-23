@@ -9,6 +9,7 @@
 
           <div class="d-flex">
             <v-btn icon="mdi-calculator-variant" :to="localePath({ name: 'index' })" />
+            <v-btn icon="mdi-history" :to="localePath({ name: 'history' })" />
             <v-btn icon="mdi-cog" :to="localePath({ name: 'settings' })" />
 
             <v-menu>
