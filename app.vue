@@ -3,9 +3,11 @@
     <v-app-bar>
       <v-container>
         <div class="d-flex justify-space-between align-center">
-          <v-app-bar-title class="font-weight-medium">
-            {{ $t('app.name') }}
-          </v-app-bar-title>
+          <NuxtLink :to="localePath({ name: 'index' })" class="text-decoration-none" style="color: white">
+            <v-app-bar-title class="font-weight-medium">
+              {{ $t('app.name') }}
+            </v-app-bar-title>
+          </NuxtLink>
 
           <div class="d-flex">
             <v-btn icon="mdi-calculator-variant" :to="localePath({ name: 'index' })" />

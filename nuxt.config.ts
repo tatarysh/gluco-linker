@@ -1,8 +1,15 @@
 import en from './lang/en-US.json'
 
 export default defineNuxtConfig({
-  ssr: false,
+  ssr: true,
   devtools: { enabled: true },
+  nitro: {
+    presets: 'netlify-edge',
+    prerender: {
+      crawlLinks: true,
+      routes: ['/sitemap.xml'],
+    },
+  },
   modules: ['@invictus.codes/nuxt-vuetify', '@nuxtjs/i18n', '@kevinmarrec/nuxt-pwa', 'nuxt-gtag'],
   app: {
     head: {
