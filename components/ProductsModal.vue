@@ -118,7 +118,12 @@
           @click="confirm"
           :disabled="selectedProducts.length === 0"
         >
-          {{ $t('products:apply_to_calculator') }}
+          <span class="d-none d-sm-inline">
+            {{ $t('products:apply_to_calculator') }}
+          </span>
+          <span class="d-sm-none">
+            {{ $t('apply_short') }}
+          </span>
         </v-btn>
       </v-card-actions>
     </v-card>

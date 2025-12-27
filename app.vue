@@ -19,8 +19,6 @@
 
           <div class="d-flex">
             <v-btn icon="mdi-calculator-variant" :to="localePath({ name: 'index' })" />
-            <v-btn icon="mdi-nutrition" :to="localePath({ name: 'products' })" />
-            <v-btn icon="mdi-cog" :to="localePath({ name: 'settings' })" />
 
             <v-menu>
               <template #activator="{ props }">
@@ -40,6 +38,50 @@
                 </v-list>
               </v-card>
             </v-menu>
+
+            <v-menu>
+              <template #activator="{ props }">
+                <v-btn v-bind="props" icon="mdi-menu" />
+              </template>
+
+              <v-card>
+                <v-list>
+                  <v-list-item :to="localePath({ name: 'products' })">
+                    <template #prepend>
+                      <v-icon icon="mdi-nutrition" />
+                    </template>
+                    <template #title>
+                      <span>{{ $t('products:product_list') }}</span>
+                    </template>
+                  </v-list-item>
+                  <v-list-item :to="localePath({ name: 'settings' })">
+                    <template #prepend>
+                      <v-icon icon="mdi-cog" />
+                    </template>
+                    <template #title>
+                      <span>{{ $t('settings:title') }}</span>
+                    </template>
+                  </v-list-item>
+                  <v-divider />
+                  <v-list-item :to="localePath({ name: 'about' })">
+                    <template #prepend>
+                      <v-icon icon="mdi-information" />
+                    </template>
+                    <template #title>
+                      <span>{{ $t('about:title') }}</span>
+                    </template>
+                  </v-list-item>
+                  <v-list-item :to="localePath({ name: 'contact' })">
+                    <template #prepend>
+                      <v-icon icon="mdi-email" />
+                    </template>
+                    <template #title>
+                      <span>{{ $t('contact:title') }}</span>
+                    </template>
+                  </v-list-item>
+                </v-list>
+              </v-card>
+            </v-menu>
           </div>
         </div>
       </v-container>
@@ -47,24 +89,6 @@
     <v-main>
       <nuxt-page />
     </v-main>
-    <v-footer class="bg-dark border-t">
-      <v-container>
-        <div class="d-flex justify-space-between align-center py-1 text-caption">
-          <div>
-            © {{ new Date().getFullYear() }} {{ $t('app.name') }}
-          </div>
-          <div class="d-flex align-center">
-            <NuxtLink :to="localePath({ name: 'about' })" class="text-decoration-none text-caption mx-2">
-              {{ $t('about:title') }}
-            </NuxtLink>
-            <span class="text-caption">·</span>
-            <NuxtLink :to="localePath({ name: 'contact' })" class="text-decoration-none text-caption mx-2">
-              {{ $t('contact:title') }}
-            </NuxtLink>
-          </div>
-        </div>
-      </v-container>
-    </v-footer>
   </v-app>
 </template>
 

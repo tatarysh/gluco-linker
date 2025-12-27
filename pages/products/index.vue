@@ -1,59 +1,57 @@
 <template>
   <v-container>
     <v-row justify="center">
-      <v-col cols="12" md="8">
+      <v-col cols="12" md="6">
         <!-- Formularz dodawania/edycji produktu -->
-        <v-card class="mb-4" elevation="2">
-          <v-card-title>
+        <div class="mb-4">
+          <div class="text-h6 mb-3">
             {{ editingProduct ? $t('products:edit_product') : $t('products:add_product') }}
-          </v-card-title>
-          <v-card-text>
-            <v-form v-model="valid" validate-on="lazy blur" @submit.prevent="onSubmit">
-              <v-text-field
-                v-model="form.name"
-                :label="$t('products:product_name')"
-                variant="solo-filled"
-                persistent-placeholder
-                :rules="[rules.required]"
-              />
-              <v-text-field
-                v-model.number="form.carbsPer100g"
-                :label="$t('products:carbs_per_100g')"
-                type="number"
-                variant="solo-filled"
-                persistent-placeholder
-                :suffix="$t('gram:short_unit')"
-                :rules="[rules.required, rules.gt(0), rules.lt(100)]"
-              />
-              <v-text-field
-                v-model.number="form.defaultWeight"
-                :label="$t('products:default_weight_optional')"
-                type="number"
-                variant="solo-filled"
-                persistent-placeholder
-                :suffix="$t('gram:short_unit')"
-                :rules="[rules.gtOptional(0)]"
-              />
+          </div>
+          <v-form v-model="valid" validate-on="lazy blur" @submit.prevent="onSubmit">
+            <v-text-field
+              v-model="form.name"
+              :label="$t('products:product_name')"
+              variant="solo-filled"
+              persistent-placeholder
+              :rules="[rules.required]"
+            />
+            <v-text-field
+              v-model.number="form.carbsPer100g"
+              :label="$t('products:carbs_per_100g')"
+              type="number"
+              variant="solo-filled"
+              persistent-placeholder
+              :suffix="$t('gram:short_unit')"
+              :rules="[rules.required, rules.gt(0), rules.lt(100)]"
+            />
+            <v-text-field
+              v-model.number="form.defaultWeight"
+              :label="$t('products:default_weight_optional')"
+              type="number"
+              variant="solo-filled"
+              persistent-placeholder
+              :suffix="$t('gram:short_unit')"
+              :rules="[rules.gtOptional(0)]"
+            />
 
-              <div class="d-flex justify-end gap-2">
-                <v-btn
-                  v-if="editingProduct"
-                  color="error"
-                  variant="text"
-                  @click="cancelEdit"
-                >
-                  {{ $t('cancel') }}
-                </v-btn>
-                <v-btn
-                  color="success"
-                  @click="onSubmit"
-                >
-                  {{ editingProduct ? $t('update') : $t('add') }}
-                </v-btn>
-              </div>
-            </v-form>
-          </v-card-text>
-        </v-card>
+            <div class="d-flex justify-end gap-2">
+              <v-btn
+                v-if="editingProduct"
+                color="error"
+                variant="text"
+                @click="cancelEdit"
+              >
+                {{ $t('cancel') }}
+              </v-btn>
+              <v-btn
+                color="success"
+                @click="onSubmit"
+              >
+                {{ editingProduct ? $t('update') : $t('add') }}
+              </v-btn>
+            </div>
+          </v-form>
+        </div>
 
         <!-- Lista produktów -->
         <v-card elevation="2">

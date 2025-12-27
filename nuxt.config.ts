@@ -26,7 +26,6 @@ export default defineNuxtConfig({
     manifest: {
       name: 'Gluco Linker',
       description: en['app.description'],
-      theme_color: '#4CAF50',
       background_color: '#000000',
     },
     icon: {
