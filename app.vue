@@ -3,14 +3,23 @@
     <v-app-bar>
       <v-container>
         <div class="d-flex justify-space-between align-center">
-          <NuxtLink :to="localePath({ name: 'index' })" class="text-decoration-none" style="color: white">
+          <!-- Desktop version - full name -->
+          <NuxtLink :to="localePath({ name: 'index' })" class="text-decoration-none d-none d-sm-flex" style="color: white">
             <v-app-bar-title class="font-weight-medium">
               {{ $t('app.name') }}
             </v-app-bar-title>
           </NuxtLink>
 
+          <!-- Mobile version - GL in circle -->
+          <NuxtLink :to="localePath({ name: 'index' })" class="text-decoration-none d-sm-none">
+            <v-avatar color="primary" class="font-weight-bold">
+              GL
+            </v-avatar>
+          </NuxtLink>
+
           <div class="d-flex">
             <v-btn icon="mdi-calculator-variant" :to="localePath({ name: 'index' })" />
+            <v-btn icon="mdi-nutrition" :to="localePath({ name: 'products' })" />
             <v-btn icon="mdi-cog" :to="localePath({ name: 'settings' })" />
 
             <v-menu>
@@ -38,6 +47,24 @@
     <v-main>
       <nuxt-page />
     </v-main>
+    <v-footer class="bg-dark border-t">
+      <v-container>
+        <div class="d-flex justify-space-between align-center py-1 text-caption">
+          <div>
+            © {{ new Date().getFullYear() }} {{ $t('app.name') }}
+          </div>
+          <div class="d-flex align-center">
+            <NuxtLink :to="localePath({ name: 'about' })" class="text-decoration-none text-caption mx-2">
+              {{ $t('about:title') }}
+            </NuxtLink>
+            <span class="text-caption">·</span>
+            <NuxtLink :to="localePath({ name: 'contact' })" class="text-decoration-none text-caption mx-2">
+              {{ $t('contact:title') }}
+            </NuxtLink>
+          </div>
+        </div>
+      </v-container>
+    </v-footer>
   </v-app>
 </template>
 

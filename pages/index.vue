@@ -17,6 +17,8 @@
           persistent-placeholder
           variant="solo-filled"
           :suffix="$t('gram:short_unit')"
+          append-icon="mdi-nutrition"
+          @click:append="productsModalOpen = true"
         />
 
         <v-text-field
@@ -35,6 +37,11 @@
         </div>
       </v-col>
     </v-row>
+
+    <ProductsModal
+      v-model="productsModalOpen"
+      @confirm="handleProductsConfirm"
+    />
   </v-container>
 </template>
 
@@ -42,12 +49,14 @@
 import calculateInsulinDose from '../libs/calculate-insulin-dose'
 import type { Report } from '../libs/calculate-insulin-dose'
 import { calculatorSettings } from '../composable/use-calculator-settings'
+import ProductsModal from '../components/ProductsModal.vue'
 
 const i18n = useI18n()
 
 const sugarLevel = ref<number | undefined>()
 const carbAmount = ref<number | undefined>()
 const insulinDose = ref<Report>()
+const productsModalOpen = ref(false)
 
 const sumInsulin = computed(() => {
   if (!insulinDose.value) {
@@ -76,6 +85,10 @@ const calculate = () => {
   if (sugarLevel.value && carbAmount.value) {
     insulinDose.value = calculateInsulinDose(carbAmount.value, sugarLevel.value, calculatorSettings.value)
   }
+}
+
+const handleProductsConfirm = (totalCarbs: number) => {
+  carbAmount.value = totalCarbs
 }
 </script>
 

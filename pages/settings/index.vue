@@ -37,8 +37,8 @@
             :rules="[rules.gt(100), rules.lt(200)]"
           />
 
-          <div class="d-flex justify-center">
-            <v-btn color="success" type="submit" :disabled="!valid">{{ $t('save') }}</v-btn>
+          <div class="d-flex justify-center my-3">
+            <v-btn color="success" @click="onSubmit">{{ $t('save') }}</v-btn>
           </div>
         </v-form>
       </v-col>
