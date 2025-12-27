@@ -9,7 +9,8 @@
 
             <div class="text-h6 mb-3">{{ $t('contact:social') }}</div>
             <div class="d-flex gap-2">
-              <v-btn icon="mdi-facebook" href="https://www.facebook.com/profile.php?id=61577897377510" target="_blank" variant="text" />
+              <v-btn icon="mdi-facebook" href="https://www.facebook.com/profile.php?id=61585528959845" target="_blank" variant="text" />
+              <v-btn icon="mdi-github" href="https://github.com/tatarysh/gluco-linker" target="_blank" variant="text" />
             </div>
           </v-card-text>
         </v-card>
