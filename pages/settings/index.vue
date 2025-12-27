@@ -37,6 +37,16 @@
             :rules="[rules.gt(100), rules.lt(200)]"
           />
 
+          <v-select
+            v-model="themeMode"
+            :items="themeOptions"
+            :label="$t('settings:theme')"
+            variant="solo-filled"
+            item-title="text"
+            item-value="value"
+            @update:model-value="setThemeMode"
+          />
+
           <div class="d-flex justify-center my-3">
             <v-btn color="success" @click="onSubmit">{{ $t('save') }}</v-btn>
           </div>
@@ -48,8 +58,10 @@
 
 <script setup lang="ts">
 import { calculatorSettings } from '../../composable/use-calculator-settings'
+import { useAppTheme } from '../../composable/use-theme'
 
 const i18n = useI18n()
+const { themeMode, setThemeMode } = useAppTheme()
 
 type Validator = (value: unknown) => true | string
 type FunctionValidator = (params: any) => Validator
@@ -74,4 +86,10 @@ const rules: Record<string, Validator | FunctionValidator> = {
 const valid = ref(false)
 const setting = ref({ ...calculatorSettings.value })
 const onSubmit = () => (calculatorSettings.value = setting.value)
+
+const themeOptions = computed(() => [
+  { text: i18n.t('settings:theme_auto'), value: 'auto' },
+  { text: i18n.t('settings:theme_light'), value: 'light' },
+  { text: i18n.t('settings:theme_dark'), value: 'dark' },
+])
 </script>
