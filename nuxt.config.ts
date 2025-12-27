@@ -25,6 +25,7 @@ export default defineNuxtConfig({
   pwa: {
     manifest: {
       name: 'Gluco Linker',
+      short_name: 'Kalkulator Insuliny',
       description: en['app.description'],
       background_color: '#000000',
     },
