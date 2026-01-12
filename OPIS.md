@@ -4,7 +4,7 @@
 
 **Zmęczony liczeniem węglowodanów? 🍕**
 
-Właśnie stworzyłem aplikację, która robi to za Ciebie! **Gluco Linker** to prosty kalkulator insuliny, który pomaga diabetykowi zaplanować każdy posiłek.
+Właśnie stworzyłem aplikację, która robi to za Ciebie! **Gluco Linker** to prosty kalkulator insuliny, który pomaga cukrzykowi zaplanować każdy posiłek.
 
 Wpisz węglowodany, wpisz cukier we krwi → i gotowe! Aplikacja od razu pokazuje ile insuliny podać. 💉
 
@@ -23,7 +23,7 @@ Wpisz węglowodany, wpisz cukier we krwi → i gotowe! Aplikacja od razu pokazuj
 
 Jestem cukrzycą i codziennie mierzę się z tym samym problemem - szybkie, dokładne obliczenie jaką dawkę insuliny podać. Chciałem czegoś prostego, bez zbędnych zawirowań, bez reklam i bez śledzenia moich danych.
 
-Dlatego stworzyłem **Gluco Linker** - aplikację webową dla diabetyków, którzy chcą mieć życie prostsze.
+Dlatego stworzyłem **Gluco Linker** - aplikację webową dla cukrzyków, którzy chcą mieć życie prostsze.
 
 **Co może zrobić:**
 - 📊 Szybko obliczy dawkę insuliny na podstawie węglowodanów i cukru we krwi
@@ -32,7 +32,7 @@ Dlatego stworzyłem **Gluco Linker** - aplikację webową dla diabetyków, któr
 - 📱 Działa bez internetu - Twoje dane zostają w Twoim telefonie
 - 🌍 Angielski i polski
 
-**To jest za darmo i zawsze będzie za darmo.** Brak ukrytych kosztów, brak reklam. Po prostu narzędzie stworzone dla diabetyków, przez diabetyka.
+**To jest za darmo i zawsze będzie za darmo.** Brak ukrytych kosztów, brak reklam. Po prostu narzędzie stworzone dla cukrzyków, przez cukrzyka.
 
 👉 Spróbuj teraz: [Link]
 
@@ -40,7 +40,7 @@ Dlatego stworzyłem **Gluco Linker** - aplikację webową dla diabetyków, któr
 
 ## Długi opis (do wpisania na grupach/forach)
 
-**Cześć! Chciałbym podzielić się czymś, co utworzyłem dla nas - dla diabetyków 🩺**
+**Cześć! Chciałbym podzielić się czymś, co utworzyłem dla nas - dla cukrzyków 🩺**
 
 Jestem cukrzycą typu 1 i codziennie liczę węglowodany, sprawdzam cukier we krwi i liczę ile insuliny podać. Zawsze szukałem czegoś prostego - bez rozmysłów, bez reklam, bez aplikacji, która zleciałaby wszystkie moje dane do chmury.
 
@@ -71,7 +71,7 @@ Mogę Cię prosić tylko o jedno - jeśli znasz kogoś, kto ma cukrzycę, podzie
 
 ## Hashtagi do postów
 
-#CukrzycaTyp1 #Cukrzyca #Diabetyk #DiabetesAwareness #ZdrowieToWażne #DarmowaaAplicacja #BezReklam #InnowaM #TechDlaSiebie #AplikacjaWebowa #Insulina #Węglowodany #HealthTech
+#CukrzycaTyp1 #Cukrzyca #Cukrzyk #DiabetesAwareness #ZdrowieToWażne #DarmowaaAplicacja #BezReklam #InnowaM #TechDlaSiebie #AplikacjaWebowa #Insulina #Węglowodany #HealthTech
 
 ---
 
@@ -79,7 +79,7 @@ Mogę Cię prosić tylko o jedno - jeśli znasz kogoś, kto ma cukrzycę, podzie
 
 Zmęczony liczeniem węglowodanów? 🍕
 
-Właśnie stworzyłem aplikację, która robi to za Ciebie! **Gluco Linker** to prosty kalkulator insuliny dla diabetyków.
+Właśnie stworzyłem aplikację, która robi to za Ciebie! **Gluco Linker** to prosty kalkulator insuliny dla cukrzyków.
 
 Jak to działa?
 ✅ Wpisujesz węglowodany
@@ -98,7 +98,7 @@ To aplikacja stworzona przez cukrzyka dla cukrzyka. Bez zbędnych zawirowań, ty
 
 👉 Spróbuj teraz: [LINK]
 
-#CukrzycaTyp1 #Diabetyk #ZdrowieToWażne #DarmowaaAplicacja
+#CukrzycaTyp1 #Cukrzyk #ZdrowieToWażne #DarmowaaAplicacja
 
 ---
 
@@ -112,7 +112,7 @@ Jeśli masz cukrzycę i szukasz czegoś prostego - daj znać! 👉 [LINK]
 
 ## Wersja dla forum/grupy
 
-Cześć diabetycy! 👋
+Cześć cukrzycy! 👋
 
 Chciałbym podzielić się czymś co stwórzyłem dla nas. Zrobiłem aplikację webową do liczenia insuliny - **Gluco Linker**.
 
