@@ -11,9 +11,24 @@ export default defineEventHandler(async (event) => {
     { path: '/contact', changefreq: 'yearly', priority: 0.6 },
   ]
 
+  const locales = ['en', 'pl']
+  const allRoutes: Array<{ path: string; changefreq: string; priority: number }> = []
+
+  // Generate routes for each locale
+  routes.forEach((route) => {
+    locales.forEach((locale) => {
+      const localizedPath = locale === 'en' ? route.path : `/${locale}${route.path}`
+      allRoutes.push({
+        path: localizedPath,
+        changefreq: route.changefreq,
+        priority: route.priority,
+      })
+    })
+  })
+
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${routes.map(route => `  <url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${allRoutes.map(route => `  <url>
     <loc>${baseUrl}${route.path}</loc>
     <changefreq>${route.changefreq}</changefreq>
     <priority>${route.priority}</priority>

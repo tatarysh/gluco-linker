@@ -53,6 +53,18 @@ import ProductsModal from '../components/ProductsModal.vue'
 
 const i18n = useI18n()
 
+// SEO Meta tags
+useSeoMeta({
+  title: computed(() => `${i18n.t('app.name')} - ${i18n.t('app.description')}`),
+  description: computed(() => i18n.t('app.description')),
+  ogTitle: computed(() => i18n.t('app.name')),
+  ogDescription: computed(() => i18n.t('app.description')),
+  ogType: 'website',
+  twitterCard: 'summary',
+  twitterTitle: computed(() => i18n.t('app.name')),
+  twitterDescription: computed(() => i18n.t('app.description')),
+})
+
 const sugarLevel = ref<number | undefined>()
 const carbAmount = ref<number | undefined>()
 const insulinDose = ref<Report>()

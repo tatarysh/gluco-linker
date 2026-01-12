@@ -104,12 +104,46 @@ const { locale, locales, t } = useI18n()
 const localePath = useLocalePath()
 const switchLocalePath = useSwitchLocalePath()
 const availableLocales = computed(() => locales.value.filter((i) => typeof i === 'object' && i.code !== locale.value))
+const route = useRoute()
 
 // Initialize theme
 const { applyTheme, currentTheme } = useAppTheme()
 if (process.client) {
   applyTheme()
 }
+
+// Get current URL for canonical and og:url
+const canonicalUrl = computed(() => {
+  if (process.server) {
+    return `https://gluco-linker.netlify.app${route.path}`
+  }
+  return typeof window !== 'undefined' ? window.location.href : ''
+})
+
+// Generate hreflang links
+const hreflangLinks = computed(() => {
+  const links: Array<{ rel: string; hreflang: string; href: string }> = []
+
+  locales.value.forEach((loc) => {
+    if (typeof loc === 'object') {
+      const localizedPath = switchLocalePath(loc.code)
+      links.push({
+        rel: 'alternate',
+        hreflang: loc.iso || loc.code,
+        href: `https://gluco-linker.netlify.app${localizedPath}`,
+      })
+    }
+  })
+
+  // Add x-default
+  links.push({
+    rel: 'alternate',
+    hreflang: 'x-default',
+    href: `https://gluco-linker.netlify.app/`,
+  })
+
+  return links
+})
 
 useHead({
   htmlAttrs: {
@@ -121,12 +155,49 @@ useHead({
       type: 'image/webp',
       href: '/favicon.webp',
     },
+    {
+      rel: 'canonical',
+      href: canonicalUrl.value,
+    },
+    ...hreflangLinks.value,
   ],
 })
 
 useSeoMeta({
   title: computed(() => t('app.name')),
   description: computed(() => t('app.description')),
+  ogUrl: canonicalUrl.value,
+  ogType: 'website',
+  ogLocale: computed(() => locale.value === 'en' ? 'en_US' : 'pl_PL'),
+  ogSiteName: computed(() => t('app.name')),
+  twitterCard: 'summary',
+})
+
+// Structured Data (JSON-LD)
+const structuredData = computed(() => JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: t('app.name'),
+  description: t('app.description'),
+  url: 'https://gluco-linker.netlify.app',
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Any',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  inLanguage: ['en-US', 'pl-PL'],
+  browserRequirements: 'Requires JavaScript. Requires HTML5.',
+}))
+
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      children: structuredData.value,
+    },
+  ],
 })
 </script>
 

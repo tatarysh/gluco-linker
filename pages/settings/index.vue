@@ -92,4 +92,16 @@ const themeOptions = computed(() => [
   { text: i18n.t('settings:theme_light'), value: 'light' },
   { text: i18n.t('settings:theme_dark'), value: 'dark' },
 ])
+
+// SEO Meta tags
+useSeoMeta({
+  title: computed(() => `${i18n.t('settings:title')} - ${i18n.t('app.name')}`),
+  description: computed(() => i18n.t('settings:description') || i18n.t('app.description')),
+  ogTitle: computed(() => `${i18n.t('settings:title')} - ${i18n.t('app.name')}`),
+  ogDescription: computed(() => i18n.t('settings:description') || i18n.t('app.description')),
+  ogType: 'website',
+  twitterCard: 'summary',
+  twitterTitle: computed(() => `${i18n.t('settings:title')} - ${i18n.t('app.name')}`),
+  twitterDescription: computed(() => i18n.t('settings:description') || i18n.t('app.description')),
+})
 </script>

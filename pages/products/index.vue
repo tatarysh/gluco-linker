@@ -242,4 +242,16 @@ const deleteProduct = () => {
     }
   }
 }
+
+// SEO Meta tags
+useSeoMeta({
+  title: computed(() => `${i18n.t('products:product_list')} - ${i18n.t('app.name')}`),
+  description: computed(() => i18n.t('products:description') || i18n.t('app.description')),
+  ogTitle: computed(() => `${i18n.t('products:product_list')} - ${i18n.t('app.name')}`),
+  ogDescription: computed(() => i18n.t('products:description') || i18n.t('app.description')),
+  ogType: 'website',
+  twitterCard: 'summary',
+  twitterTitle: computed(() => `${i18n.t('products:product_list')} - ${i18n.t('app.name')}`),
+  twitterDescription: computed(() => i18n.t('products:description') || i18n.t('app.description')),
+})
 </script>
