@@ -13,11 +13,23 @@ export default defineNuxtConfig({
   modules: ['@invictus.codes/nuxt-vuetify', '@nuxtjs/i18n', '@kevinmarrec/nuxt-pwa', 'nuxt-gtag'],
   app: {
     head: {
-      viewport: 'width=device-width, initial-scale=1, user-scalable=0',
+      viewport: 'width=device-width, initial-scale=1, user-scalable=0, viewport-fit=cover',
       meta: [
         {
           name: 'description',
           content: en['app.description'],
+        },
+        {
+          name: 'theme-color',
+          content: '#000000',
+        },
+        {
+          name: 'apple-mobile-web-app-capable',
+          content: 'yes',
+        },
+        {
+          name: 'apple-mobile-web-app-status-bar-style',
+          content: 'black-translucent',
         },
       ],
     },
@@ -28,6 +40,8 @@ export default defineNuxtConfig({
       short_name: 'Kalkulator Insuliny',
       description: en['app.description'],
       background_color: '#000000',
+      display: 'standalone',
+      theme_color: '#000000',
     },
     icon: {
       source: './public/favicon.webp',
