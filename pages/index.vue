@@ -32,6 +32,28 @@
           :messages="details"
         />
 
+        <!-- Injection site chips -->
+        <div v-if="showInjectionSiteNight || showInjectionSiteDay" class="d-flex justify-space-between my-3">
+          <v-chip
+            v-if="showInjectionSiteDay"
+            size="small"
+            variant="tonal"
+            color="warning"
+            prepend-icon="mdi-silverware-fork-knife"
+          >
+            {{ currentMealName }}: {{ currentDayInjectionSite }}
+          </v-chip>
+          <v-chip
+            v-if="showInjectionSiteNight"
+            size="small"
+            variant="tonal"
+            color="primary"
+            prepend-icon="mdi-sleep"
+          >
+            {{ suggestedInjectionSiteName }}
+          </v-chip>
+        </div>
+
         <div class="d-flex justify-center my-3">
           <v-btn color="success" @click="calculate">{{ $t('calculate') }}</v-btn>
         </div>
@@ -49,6 +71,7 @@
 import calculateInsulinDose from '../libs/calculate-insulin-dose'
 import type { Report } from '../libs/calculate-insulin-dose'
 import { calculatorSettings } from '../composable/use-calculator-settings'
+import { nightInjectionSites, dayInjectionSiteGroups } from '../libs/injection-sites'
 import ProductsModal from '../components/ProductsModal.vue'
 
 const i18n = useI18n()
@@ -89,6 +112,54 @@ const details = computed(() => {
     dose: insulinDose.value.dose.toFixed(2),
     correction: insulinDose.value.correction.toFixed(2),
   })
+})
+
+const showInjectionSiteDay = computed(() =>
+  calculatorSettings.value.show_injection_site_day ?? false
+)
+
+const showInjectionSiteNight = computed(() =>
+  calculatorSettings.value.show_injection_site_night ?? false
+)
+
+const suggestedInjectionSiteIndex = computed(() => {
+  const daysSinceEpoch = Math.floor(Date.now() / 86400000) // milliseconds to days
+  return daysSinceEpoch % nightInjectionSites.length
+})
+
+const suggestedInjectionSite = computed(() => {
+  return nightInjectionSites[suggestedInjectionSiteIndex.value]
+})
+
+const suggestedInjectionSiteName = computed(() => {
+  const site = suggestedInjectionSite.value
+  return site ? i18n.t(site.labelKey) : ''
+})
+
+// Day injection logic
+const dayModulo = computed(() => {
+  const today = new Date()
+  const daysSinceEpoch = Math.floor(today.getTime() / 86400000) // milliseconds to days
+  return daysSinceEpoch % 4
+})
+
+const currentMealIndex = computed(() => {
+  const hour = new Date().getHours()
+  if (hour < 12) return 0 // breakfast
+  if (hour < 18) return 1 // lunch
+  return 2 // dinner
+})
+
+const mealNames = ['meal:breakfast', 'meal:lunch', 'meal:dinner']
+
+const currentMealName = computed(() => {
+  return i18n.t(mealNames[currentMealIndex.value])
+})
+
+const currentDayInjectionSite = computed(() => {
+  const group = dayInjectionSiteGroups[dayModulo.value]
+  if (!group || !group[currentMealIndex.value]) return ''
+  return i18n.t(group[currentMealIndex.value].labelKey)
 })
 
 watch([sugarLevel, carbAmount], () => (insulinDose.value = undefined))
