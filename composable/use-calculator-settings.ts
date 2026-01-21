@@ -5,6 +5,8 @@ const initialSetting = {
   insulin_correction_factor: 30,
   target_range_bottom: 80,
   target_range_top: 130,
+  show_injection_site_day: true,
+  show_injection_site_night: true,
 }
 
 export type Settings = typeof initialSetting

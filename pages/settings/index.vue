@@ -37,6 +37,22 @@
             :rules="[rules.gt(100), rules.lt(200)]"
           />
 
+          <v-switch
+            v-model="setting.show_injection_site_day"
+            :label="$t('setting:show_injection_site_day')"
+            color="primary"
+            hide-details
+            class="mb-4"
+          />
+
+          <v-switch
+            v-model="setting.show_injection_site_night"
+            :label="$t('setting:show_injection_site_night')"
+            color="primary"
+            hide-details
+            class="mb-4"
+          />
+
           <v-select
             v-model="themeMode"
             :items="themeOptions"
@@ -84,7 +100,11 @@ const rules: Record<string, Validator | FunctionValidator> = {
 }
 
 const valid = ref(false)
-const setting = ref({ ...calculatorSettings.value })
+const setting = ref({
+  ...calculatorSettings.value,
+  show_injection_site_day: calculatorSettings.value.show_injection_site_day ?? false,
+  show_injection_site_night: calculatorSettings.value.show_injection_site_night ?? false,
+})
 const onSubmit = () => (calculatorSettings.value = setting.value)
 
 const themeOptions = computed(() => [
